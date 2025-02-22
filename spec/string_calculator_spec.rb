@@ -28,4 +28,8 @@ RSpec.describe StringCalculator do
     it 'throws an exception for negative numbers' do
         expect { StringCalculator.add("1,-2") }.to raise_error("Negative numbers not allowed -2")
     end
+
+    it 'ignores non-numeric characters and sums the valid ones' do
+        expect(StringCalculator.add("1,a,2,3")).to eq(6)
+    end
 end

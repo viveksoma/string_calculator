@@ -10,7 +10,9 @@ class StringCalculator
             delimiter = ","
         end
 
-        nums = numbers.split(/[\n#{delimiter}]/).map(&:to_i)
+        nums = numbers.split(/[\n#{Regexp.escape(delimiter)}]/).map do |n|
+            Integer(n) rescue nil
+        end.compact
 
         negatives = nums.select { |n| n < 0 }
         raise "Negative numbers not allowed #{negatives.join(', ')}" unless negatives.empty?
